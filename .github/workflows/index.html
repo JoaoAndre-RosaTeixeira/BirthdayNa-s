@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Compte à Rebours</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        #compteARebours {
+            text-align: center;
+        }
+        .compte-a-rebours-chiffre {
+            font-size: 48px;
+            margin: 10px;
+        }
+        .compte-a-rebours-texte {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="compteARebours">
+    <h1>Naïs birthday 30 ans</h1>
+    <div id="jours" class="compte-a-rebours-chiffre"></div>
+    <div id="heures" class="compte-a-rebours-chiffre"></div>
+    <div id="minutes" class="compte-a-rebours-chiffre"></div>
+    <div id="secondes" class="compte-a-rebours-chiffre"></div>
+</div>
+
+<script>
+    function miseAJourCompteARebours() {
+        const maintenant = new Date().getTime();
+        const dateCible = new Date('Feb 7, 2025 00:00:00').getTime();
+        const difference = dateCible - maintenant;
+
+        const jours = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const heures = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const secondes = Math.floor((difference % (1000 * 60)) / 1000);
+
+        document.getElementById("jours").innerHTML = jours + " <span class='compte-a-rebours-texte'>Jours</span>";
+        document.getElementById("heures").innerHTML = heures + " <span class='compte-a-rebours-texte'>Heures</span>";
+        document.getElementById("minutes").innerHTML = minutes + " <span class='compte-a-rebours-texte'>Minutes</span>";
+        document.getElementById("secondes").innerHTML = secondes + " <span class='compte-a-rebours-texte'>Secondes</span>";
+
+        if (difference < 0) {
+            clearInterval(x);
+            document.getElementById("compteARebours").innerHTML = "L'événement est passé";
+        }
+    }
+
+    miseAJourCompteARebours();
+    var x = setInterval(miseAJourCompteARebours, 1000);
+</script>
+
+</body>
+</html>
